@@ -7,10 +7,10 @@
       @close="clear">
       <el-form v-model="form" style="text-align: left" ref="dataForm">
         <el-form-item label="书名" :label-width="formLabelWidth" prop="title">
-          <el-input v-model="form.title" autocomplete="off" placeholder="不加《》"></el-input>
+          <el-input v-model="form.title" autocomplete="off" placeholder="活着"></el-input>
         </el-form-item>
         <el-form-item label="作者" :label-width="formLabelWidth" prop="author">
-          <el-input v-model="form.author" autocomplete="off"></el-input>
+          <el-input v-model="form.author" autocomplete="off" placeholder="余华"></el-input>
         </el-form-item>
         <el-form-item label="出版日期" :label-width="formLabelWidth" prop="date">
           <el-input v-model="form.date" autocomplete="off"></el-input>

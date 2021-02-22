@@ -9,8 +9,8 @@ import store from './store'
 
 var axios = require('axios')
 
-// 设置反向代理，前端请求默认发送到 http://localhost:8989/api
-axios.defaults.baseURL = 'http://localhost:8989/api'
+// 设置反向代理，前端请求默认发送到 http://localhost:8989/bm/api
+axios.defaults.baseURL = 'http://localhost:8989/bm/api'
 
 // 全局注册axios
 Vue.prototype.$axios = axios
