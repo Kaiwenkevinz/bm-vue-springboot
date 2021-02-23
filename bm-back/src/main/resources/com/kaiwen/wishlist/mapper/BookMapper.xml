@@ -44,4 +44,13 @@
         where b.cid = #{cid}
     </select>
 
+<!--    模糊搜索-->
+    <select id="selectBykeyWord" parameterType="string" resultMap="BookResultMap">
+        <bind name="pattern" value="'%' + keyword + '%'" />
+        select b.id, b.coverPath, b.title, b.author, b.date, b.press, b.abs, b.cid, c.name
+        from book b
+        left join category c on b.cid = c.id
+        where b.title like #{pattern} or b.author like #{pattern}
+    </select>
+
 </mapper>

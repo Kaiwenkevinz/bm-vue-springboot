@@ -1,6 +1,7 @@
 package com.kaiwen.wishlist.service;
 
 import com.kaiwen.wishlist.entity.Book;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BookService {
     void update(Book book);
 
     List<Book> findByCategory(int cid);
+
+    List<Book> selectBykeyWord(String keyword);
 }

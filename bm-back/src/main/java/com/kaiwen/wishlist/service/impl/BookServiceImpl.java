@@ -38,4 +38,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findByCategory(int cid) {
         return bookDAO.findByCategory(cid);
     }
+
+    @Override
+    public List<Book> selectBykeyWord(String keyword) {
+        return bookDAO.selectBykeyWord(keyword);
+    }
 }

@@ -120,4 +120,14 @@ public class BookController {
         }
     }
 
+
+    /**
+     * 模糊搜索
+     */
+
+    @GetMapping("search")
+    public List<Book> findBooksByCategory(@RequestParam String keyword) {
+        log.info("模糊查找图书：[{}]", keyword);
+        return bookService.selectBykeyWord(keyword);
+    }
 }

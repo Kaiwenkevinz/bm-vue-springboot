@@ -2,6 +2,7 @@ package com.kaiwen.wishlist.dao;
 
 import com.kaiwen.wishlist.entity.Book;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface BookDAO {
     void update(Book book);
 
     List<Book> findByCategory(int cid);
+
+    List<Book> selectBykeyWord(@Param("keyword") String keyword);
 }

@@ -72,12 +72,13 @@ export default {
       console.log(this.currentPage)
     },
     searchResult () {
+      console.log('搜索：' + this.$refs.searchBar.keywords)
       var _this = this
       this.$axios
-        .get('/search?keywords=' + this.$refs.searchBar.keywords, {
-        }).then(resp => {
-          if (resp && resp.status === 200) {
-            _this.books = resp.data
+        .get('/search?keyword=' + this.$refs.searchBar.keywords, {
+        }).then(res => {
+          if (res && res.status === 200) {
+            _this.books = res.data
           }
         })
     },
