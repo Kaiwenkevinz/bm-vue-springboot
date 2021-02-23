@@ -2,8 +2,10 @@ package com.kaiwen.wishlist.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Book {
+public class Book implements Serializable {
     int id;
     String coverPath;
     String title;

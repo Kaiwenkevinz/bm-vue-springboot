@@ -2,6 +2,9 @@
 
 <mapper namespace="com.kaiwen.wishlist.dao.BookDAO">
 
+<!--    注册redis缓存-->
+    <cache type="com.kaiwen.wishlist.cache.RedisCache" />
+
     <insert id="save" parameterType="Book" useGeneratedKeys="true" keyProperty="id">
         insert into book (coverPath, title, author, date, press, abs, cid)
         values (#{coverPath}, #{title}, #{author}, #{date}, #{press}, #{abs}, #{cid})
