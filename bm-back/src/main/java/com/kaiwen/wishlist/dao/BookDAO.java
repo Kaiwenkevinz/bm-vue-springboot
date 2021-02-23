@@ -11,4 +11,6 @@ public interface BookDAO {
     void save(Book book);
 
     List<Book> findAll();
+
+    void delete(int id);
 }

@@ -7,6 +7,11 @@
         values (#{coverPath}, #{title}, #{author}, #{date}, #{press}, #{abs}, #{cid})
     </insert>
 
+    <delete id="delete" parameterType="int">
+        delete from book where id = #{id}
+    </delete>
+
+    <!--一对一-->
     <resultMap type="com.kaiwen.wishlist.entity.Book" id="BookResultMap">
         <id column="id" property="id"/>
         <result column="coverPath" property="coverPath" />
@@ -20,7 +25,6 @@
             <result column="name" property="name" />
         </association>
     </resultMap>
-
     <select id="findAll" resultMap="BookResultMap">
         select b.id, b.coverPath, b.title, b.author, b.date, b.press, b.abs, b.cid, c.name
         from book b

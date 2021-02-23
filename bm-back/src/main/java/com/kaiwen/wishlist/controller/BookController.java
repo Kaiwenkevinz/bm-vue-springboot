@@ -2,6 +2,7 @@ package com.kaiwen.wishlist.controller;
 
 import com.kaiwen.wishlist.entity.Book;
 import com.kaiwen.wishlist.entity.Result;
+import com.kaiwen.wishlist.entity.User;
 import com.kaiwen.wishlist.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
@@ -46,6 +47,27 @@ public class BookController {
             return new Result(400, "图书添加失败！");
         }
     }
+
+    /**
+     * 删除图书
+     */
+    @PostMapping("/books/delete")
+    public void delete(@RequestBody Book book) {
+        log.info("删除图书id: [{}]", book.getId());
+        bookService.delete(book.getId());
+        this.deleteBookCover(book.getCoverPath());
+    }
+
+    private void deleteBookCover(String url) {
+        String path = "C:\\IDEAworkspace\\wishlist-vue-springboot\\images\\" + url.substring(url.lastIndexOf("/") + 1);
+        log.info("删除图片: [{}]", path);
+        File file = new File(path);
+        if (file.exists()) {
+            file.delete();
+            log.info("删除图片成功");
+        }
+    }
+
 
     /**
      * 上传图片

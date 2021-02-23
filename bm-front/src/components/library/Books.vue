@@ -21,7 +21,7 @@
             <div class="title">
               <a href="">{{item.title}}</a>
             </div>
-            <i class="el-icon-delete" @click="deleteBook(item.id)"></i>
+            <i class="el-icon-delete" @click="deleteBook(item)"></i>
           </div>
           <div class="author">{{item.author}}</div>
         </el-card>
@@ -81,15 +81,23 @@ export default {
           }
         })
     },
-    deleteBook (id) {
-      this.$confirm('此操作将永久删除该书籍, 是否继续?', '提示', {
+    deleteBook (item) {
+      this.$confirm('将删除图书, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        console.log('delete')
+        console.log({
+          id: item.id,
+          coverPath: item.coverPath
+        })
         this.$axios
-          .post('/delete', {id: id}).then(resp => {
-            if (resp && resp.status === 200) {
+          .post('/books/delete', {
+            id: item.id,
+            coverPath: item.coverPath
+          }).then(res => {
+            if (res && res.status === 200) {
               this.loadBooks()
             }
           })

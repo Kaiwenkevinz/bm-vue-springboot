@@ -94,8 +94,8 @@ export default {
           press: this.form.press,
           abs: this.form.abs,
           cid: this.form.cid
-        }).then(resp => {
-          if (resp && resp.status === 200) {
+        }).then(res => {
+          if (res && res.status === 200) {
             this.dialogFormVisible = false
             this.$emit('onSubmit')
           }
