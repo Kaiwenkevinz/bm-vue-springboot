@@ -11,6 +11,12 @@
         delete from book where id = #{id}
     </delete>
 
+    <update id="update" parameterType="Book">
+        update book
+        set coverPath=#{coverPath},  title=#{title}, author=#{author}, date=#{date}, press=#{press}, abs=#{abs}, cid=#{cid}
+        where id=#{id}
+    </update>
+
     <!--一对一-->
     <resultMap type="com.kaiwen.wishlist.entity.Book" id="BookResultMap">
         <id column="id" property="id"/>

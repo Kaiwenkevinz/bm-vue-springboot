@@ -122,10 +122,8 @@ export default {
         date: item.date,
         press: item.press,
         abs: item.abs,
-        category: {
-          id: item.cid.toString(),
-          name: item.category.name
-        }
+        cid: item.cid,
+        mode: 'edit'
       }
     }
   }

@@ -70,6 +70,20 @@ public class BookController {
 
 
     /**
+     * 更新图书
+     */
+    @PostMapping("books/update")
+    public void update(@RequestBody Book book) {
+        log.info("更新图书: [{}]", book);
+        try {
+            bookService.update(book);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
      * 上传图片
      */
     @PostMapping("books/uploadimage")
