@@ -16,7 +16,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * 用户登录
+     */
     @PostMapping("login")
     public Result login(@RequestBody User userReq) {
         log.info("login 接口");

@@ -2,15 +2,29 @@
 
 <mapper namespace="com.kaiwen.wishlist.dao.BookDAO">
 
-<!--    &lt;!&ndash;insert&ndash;&gt;-->
-<!--    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">-->
-<!--        insert into t_user-->
-<!--        values (#{id}, #{username}, #{realname}, #{password}, #{sex}, #{status}, #{registerTime})-->
-<!--    </insert>-->
+    <insert id="save" parameterType="Book" useGeneratedKeys="true" keyProperty="id">
+        insert into book (coverPath, title, author, date, press, abs, cid)
+        values (#{coverPath}, #{title}, #{author}, #{date}, #{press}, #{abs}, #{cid})
+    </insert>
 
-    <select id="findAll" resultType="Book">
-        select id, coverPath, title, author, date, press, abs, cid
-        from book
+    <resultMap type="com.kaiwen.wishlist.entity.Book" id="BookResultMap">
+        <id column="id" property="id"/>
+        <result column="coverPath" property="coverPath" />
+        <result column="title" property="title" />
+        <result column="author" property="author" />
+        <result column="date" property="date" />
+        <result column="press" property="press" />
+        <result column="abs" property="abs" />
+        <result column="cid" property="cid" />
+        <association property="category" javaType="com.kaiwen.wishlist.entity.Category">
+            <result column="name" property="name" />
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="BookResultMap">
+        select b.id, b.coverPath, b.title, b.author, b.date, b.press, b.abs, b.cid, c.name
+        from book b
+        left join category c on b.cid = c.id
     </select>
 
 </mapper>

@@ -2,7 +2,8 @@
   <el-upload
     class="img-upload"
     ref="upload"
-    action="http://localhost:8443/api/covers"
+    action="http://localhost:8989/bm/api/books/uploadimage"
+    :before-upload="beforeUploadFile"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
     :before-remove="beforeRemove"
@@ -26,6 +27,10 @@ export default {
     }
   },
   methods: {
+    beforeUploadFile (file) {
+      console.log('before upload')
+      console.log(file)
+    },
     handleRemove (file, fileList) {
     },
     handlePreview (file) {

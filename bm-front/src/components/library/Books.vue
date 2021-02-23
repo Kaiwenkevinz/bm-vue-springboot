@@ -15,7 +15,7 @@
         <el-card style="width: 135px;margin-bottom: 20px;height: 233px;float: left;margin-right: 15px" class="book"
                  bodyStyle="padding:10px" shadow="hover">
           <div class="cover" @click="editBook(item)">
-            <img :src="item.cover" alt="封面">
+            <img :src="item.coverPath" alt="封面">
           </div>
           <div class="info">
             <div class="title">
@@ -57,10 +57,13 @@ export default {
   },
   methods: {
     loadBooks () {
+      console.log('loadBooks')
       var _this = this
-      this.$axios.get('/books').then(resp => {
-        if (resp && resp.status === 200) {
-          _this.books = resp.data
+      this.$axios.get('/books').then(res => {
+        if (res && res.status === 200) {
+          console.log('loadBooks成功')
+          _this.books = res.data
+          console.log(res.data)
         }
       })
     },
@@ -100,17 +103,19 @@ export default {
       // alert(id)
     },
     editBook (item) {
+      console.log('edit book')
+      console.log(item)
       this.$refs.edit.dialogFormVisible = true
       this.$refs.edit.form = {
         id: item.id,
-        cover: item.cover,
+        coverPath: item.coverPath,
         title: item.title,
         author: item.author,
         date: item.date,
         press: item.press,
         abs: item.abs,
         category: {
-          id: item.category.id.toString(),
+          id: item.cid.toString(),
           name: item.category.name
         }
       }

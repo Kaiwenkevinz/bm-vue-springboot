@@ -10,7 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // 跨域，允许8443端口（后端）访问
+    // 跨域，8989（后端）访问
     proxyTable: {
       '/api': {
         target: 'http://localhost:8989',

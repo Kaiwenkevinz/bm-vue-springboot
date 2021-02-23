@@ -18,15 +18,15 @@
         <el-form-item label="出版社" :label-width="formLabelWidth" prop="press">
           <el-input v-model="form.press" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="封面" :label-width="formLabelWidth" prop="cover">
-          <el-input v-model="form.cover" autocomplete="off" placeholder="图片 URL"></el-input>
+        <el-form-item label="封面" :label-width="formLabelWidth" prop="coverPath">
+          <el-input v-model="form.coverPath" autocomplete="off" placeholder="图片 URL"></el-input>
           <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
         </el-form-item>
         <el-form-item label="简介" :label-width="formLabelWidth" prop="abs">
           <el-input type="textarea" v-model="form.abs" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="分类" :label-width="formLabelWidth" prop="cid">
-          <el-select v-model="form.category.id" placeholder="请选择分类">
+          <el-select v-model="form.cid" placeholder="请选择分类">
             <el-option label="文学" value="1"></el-option>
             <el-option label="流行" value="2"></el-option>
             <el-option label="文化" value="3"></el-option>
@@ -61,10 +61,10 @@ export default {
         author: '',
         date: '',
         press: '',
-        cover: '',
+        coverPath: '',
         abs: '',
+        cid: '',
         category: {
-          id: '',
           name: ''
         }
       },
@@ -74,27 +74,26 @@ export default {
   methods: {
     clear () {
       this.form = {
-        id: '',
         title: '',
         author: '',
         date: '',
         press: '',
-        cover: '',
+        coverPath: '',
         abs: '',
-        category: ''
+        category: '',
+        cid: ''
       }
     },
     onSubmit () {
       this.$axios
-        .post('/books', {
-          id: this.form.id,
-          cover: this.form.cover,
+        .post('/books/add', {
+          coverPath: this.form.coverPath,
           title: this.form.title,
           author: this.form.author,
           date: this.form.date,
           press: this.form.press,
           abs: this.form.abs,
-          category: this.form.category
+          cid: this.form.cid
         }).then(resp => {
           if (resp && resp.status === 200) {
             this.dialogFormVisible = false
@@ -103,7 +102,7 @@ export default {
         })
     },
     uploadImg () {
-      this.form.cover = this.$refs.imgUpload.url
+      this.form.coverPath = this.$refs.imgUpload.url
     }
   }
 }

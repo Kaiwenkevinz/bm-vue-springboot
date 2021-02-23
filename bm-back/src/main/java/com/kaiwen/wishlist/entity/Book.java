@@ -12,4 +12,5 @@ public class Book {
     String press;
     String abs;
     int cid;
+    Category category;
 }
