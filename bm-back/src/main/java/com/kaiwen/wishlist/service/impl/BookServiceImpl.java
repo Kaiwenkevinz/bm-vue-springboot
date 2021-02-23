@@ -33,4 +33,9 @@ public class BookServiceImpl implements BookService {
     public void update(Book book) {
         bookDAO.update(book);
     }
+
+    @Override
+    public List<Book> findByCategory(int cid) {
+        return bookDAO.findByCategory(cid);
+    }
 }

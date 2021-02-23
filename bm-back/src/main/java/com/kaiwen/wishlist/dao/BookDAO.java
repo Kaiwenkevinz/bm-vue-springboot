@@ -15,4 +15,6 @@ public interface BookDAO {
     void delete(int id);
 
     void update(Book book);
+
+    List<Book> findByCategory(int cid);
 }

@@ -82,6 +82,19 @@ public class BookController {
         }
     }
 
+    /**
+     * 根据种类获取图书
+     */
+    @GetMapping("categories/{cid}/books")
+    public List<Book> findBooksByCategory(@PathVariable("cid") int cid) {
+        log.info("根据种类查找图书：[{}]", cid);
+        if (cid == 0) {
+            return this.list();
+        } else {
+            return bookService.findByCategory(cid);
+        }
+    }
+
 
     /**
      * 上传图片

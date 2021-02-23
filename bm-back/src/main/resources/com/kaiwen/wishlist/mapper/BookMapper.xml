@@ -37,4 +37,11 @@
         left join category c on b.cid = c.id
     </select>
 
+    <select id="findByCategory" parameterType="int" resultMap="BookResultMap">
+        select b.id, b.coverPath, b.title, b.author, b.date, b.press, b.abs, b.cid, c.name
+        from book b
+        left join category c on b.cid = c.id
+        where b.cid = #{cid}
+    </select>
+
 </mapper>
