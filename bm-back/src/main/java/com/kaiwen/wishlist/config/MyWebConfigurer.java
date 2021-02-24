@@ -1,6 +1,7 @@
 package com.kaiwen.wishlist.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,6 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Slf4j
 @SpringBootConfiguration
 public class MyWebConfigurer implements WebMvcConfigurer {
+
+    @Value("${file.filepath}")
+    private String filepath;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -22,7 +26,7 @@ public class MyWebConfigurer implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("MyWebConfiguererq启动");
-        registry.addResourceHandler("/api/file/**").addResourceLocations("file:" + "C:\\IDEAworkspace\\wishlist-vue-springboot\\images\\");
+        registry.addResourceHandler("/api/file/**").addResourceLocations("file:" + filepath);
     }
 }
 

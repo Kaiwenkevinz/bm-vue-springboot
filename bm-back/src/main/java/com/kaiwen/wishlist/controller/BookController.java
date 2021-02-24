@@ -7,6 +7,7 @@ import com.kaiwen.wishlist.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +21,12 @@ import java.util.UUID;
 @CrossOrigin
 @RequestMapping("api")
 public class BookController {
+
     @Autowired
     private BookService bookService;
+
+    @Value("${file.filepath}")
+    private String filepath;
 
     /**
      * 返回所有书籍
@@ -59,7 +64,7 @@ public class BookController {
     }
 
     private void deleteBookCover(String url) {
-        String path = "C:\\IDEAworkspace\\wishlist-vue-springboot\\images\\" + url.substring(url.lastIndexOf("/") + 1);
+        String path = "C:\\IDEAworkspace\\bm-vue-springboot\\images\\" + url.substring(url.lastIndexOf("/") + 1);
         log.info("删除图片: [{}]", path);
         File file = new File(path);
         if (file.exists()) {
@@ -102,8 +107,9 @@ public class BookController {
     @PostMapping("books/uploadimage")
     public String bookImageUpload(MultipartFile file) throws Exception {
         log.info("前端传来的图片：[{}]", file);
+        log.info("图片本地地址：[{}]", filepath);
 
-        String folderPath = "C:\\IDEAworkspace\\wishlist-vue-springboot\\images";
+        String folderPath = filepath;
         File folder = new File(folderPath);
         String name = UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
         File newFile = new File(folder, name);
