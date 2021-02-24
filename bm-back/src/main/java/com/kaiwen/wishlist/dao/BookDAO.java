@@ -11,13 +11,15 @@ public interface BookDAO {
 
     void save(Book book);
 
-    List<Book> findAll();
+    List<Book> listByPage(int offset);
 
     void delete(int id);
 
     void update(Book book);
 
-    List<Book> findByCategory(int cid);
+    int count(int cid);
+
+    List<Book> findByCategory(int offset, int cid);
 
     List<Book> selectBykeyWord(@Param("keyword") String keyword);
 }

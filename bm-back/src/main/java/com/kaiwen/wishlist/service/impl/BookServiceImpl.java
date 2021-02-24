@@ -15,11 +15,6 @@ public class BookServiceImpl implements BookService {
     private BookDAO bookDAO;
 
     @Override
-    public List<Book> findAll() {
-        return bookDAO.findAll();
-    }
-
-    @Override
     public void save(Book book) {
         bookDAO.save(book);
     }
@@ -35,12 +30,22 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByCategory(int cid) {
-        return bookDAO.findByCategory(cid);
+    public List<Book> findByCategory(int offest, int cid) {
+        return bookDAO.findByCategory(offest, cid);
     }
 
     @Override
     public List<Book> selectBykeyWord(String keyword) {
         return bookDAO.selectBykeyWord(keyword);
+    }
+
+    @Override
+    public List<Book> listByPage(int pageNum) {
+        return bookDAO.listByPage(pageNum);
+    }
+
+    @Override
+    public int count(int cid) {
+        return bookDAO.count(cid);
     }
 }

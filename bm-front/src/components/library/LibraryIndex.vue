@@ -17,11 +17,23 @@ import Books from './Books'
 export default {
   name: 'AppLibrary',
   components: {Books, SideMenu},
+  data () {
+    return {
+      currentPage: 1,
+      totalBookNums: 0
+    }
+  },
   methods: {
     listByCategory () {
       var _this = this
       var cid = this.$refs.sideMenu.cid
-      var url = 'categories/' + cid + '/books'
+      var url = 'categories/' + cid + '/books/' + _this.currentPage
+      this.$axios.get('/books/count/' + cid).then(res => {
+        console.log('图书总数:')
+        console.log(res.data)
+        _this.totalBookNums = res.data
+        _this.$refs.booksArea.totalBookNums = _this.totalBookNums
+      })
       this.$axios.get(url).then(res => {
         if (res && res.status === 200) {
           _this.$refs.booksArea.books = res.data

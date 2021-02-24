@@ -34,10 +34,18 @@
             <result column="name" property="name" />
         </association>
     </resultMap>
-    <select id="findAll" resultMap="BookResultMap">
+    <select id="listByPage" parameterType="int" resultMap="BookResultMap">
         select b.id, b.coverPath, b.title, b.author, b.date, b.press, b.abs, b.cid, c.name
         from book b
         left join category c on b.cid = c.id
+        limit #{offset}, 5
+    </select>
+
+    <select id="count" parameterType="int" resultType="int">
+        select count(b.id)
+        from book b
+        left join category c on b.cid = c.id
+        where #{cid} = 0 or b.cid = #{cid}
     </select>
 
     <select id="findByCategory" parameterType="int" resultMap="BookResultMap">
@@ -45,6 +53,7 @@
         from book b
         left join category c on b.cid = c.id
         where b.cid = #{cid}
+        limit #{offset}, 5
     </select>
 
 <!--    模糊搜索-->

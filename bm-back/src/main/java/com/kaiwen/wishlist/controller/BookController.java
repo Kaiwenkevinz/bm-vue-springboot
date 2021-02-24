@@ -29,17 +29,27 @@ public class BookController {
     private String filepath;
 
     /**
-     * 返回所有书籍
+     * 根据页面数返回书籍
      */
-    @GetMapping("books")
-    public List<Book> list() {
-        log.info("api/books接口");
-        return bookService.findAll();
+    @GetMapping("books/page/{pageNum}")
+    public List<Book> listByPage(@PathVariable("pageNum") int pageNum) {
+        log.info("api/books/page接口, pageNum: [{}]", pageNum);
+        return bookService.listByPage((pageNum - 1) * 5);
     }
 
     /**
-     * 添加图书
+     * 根据种类返回图书总数
      */
+    @GetMapping("books/count/{cid}")
+    public int countByCategory(@PathVariable("cid") int cid) {
+        log.info("count接口, cid: [{}]", cid);
+        return bookService.count(cid);
+    }
+
+
+        /**
+         * 添加图书
+         */
     @PostMapping("books/add")
     public Result add(@RequestBody Book book) {
         log.info("添加图书接口");
@@ -90,13 +100,13 @@ public class BookController {
     /**
      * 根据种类获取图书
      */
-    @GetMapping("categories/{cid}/books")
-    public List<Book> findBooksByCategory(@PathVariable("cid") int cid) {
+    @GetMapping("categories/{cid}/books/{pageNum}")
+    public List<Book> findBooksByCategory(@PathVariable("cid") int cid, @PathVariable("pageNum") int pageNum) {
         log.info("根据种类查找图书：[{}]", cid);
         if (cid == 0) {
-            return this.list();
+            return this.listByPage(pageNum);
         } else {
-            return bookService.findByCategory(cid);
+            return bookService.findByCategory((pageNum - 1) * 5, cid);
         }
     }
 

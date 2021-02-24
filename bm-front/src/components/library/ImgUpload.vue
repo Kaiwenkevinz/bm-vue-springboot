@@ -45,6 +45,7 @@ export default {
       this.url = response
       this.$emit('onUpload')
       this.$message.warning('上传成功')
+      this.$refs.upload.clearFiles()
     },
     clear () {
       this.$refs.upload.clearFiles()

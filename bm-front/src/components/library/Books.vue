@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-row style="height: 840px;">
+    <el-row style="height: 500px;">
       <search-bar @onSearch="searchResult" ref="searchBar"></search-bar>
       <el-tooltip effect="dark" placement="right"
-                  v-for="item in books.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                  v-for="item in books"
                   :key="item.id">
-        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.title}}</p>
-        <p slot="content" style="font-size: 13px;margin-bottom: 6px">
+        <p slot="content" style="font-size: 16px;margin-bottom: 6px;">{{item.title}}</p>
+        <p slot="content" style="font-size: 14px;margin-bottom: 6px">
           <span>{{item.author}}</span> /
           <span>{{item.date}}</span> /
           <span>{{item.press}}</span>
@@ -33,7 +33,7 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage"
         :page-size="pagesize"
-        :total="books.length">
+        :total="totalBookNums">
       </el-pagination>
     </el-row>
   </div>
@@ -49,7 +49,8 @@ export default {
     return {
       books: [],
       currentPage: 1,
-      pagesize: 17
+      pagesize: 5,
+      totalBookNums: 0
     }
   },
   mounted: function () {
@@ -57,11 +58,18 @@ export default {
   },
   methods: {
     loadBooks () {
-      console.log('loadBooks')
+      console.log('loadBooks at page: ' + this.currentPage)
       var _this = this
-      this.$axios.get('/books').then(res => {
+
+      this.$axios.get('/books/count/0').then(res => {
+        console.log('图书总数:')
+        console.log(res.data)
+        _this.totalBookNums = res.data
+      })
+
+      this.$axios.get('/books/page/' + this.currentPage).then(res => {
         if (res && res.status === 200) {
-          console.log('loadBooks成功')
+          console.log('loadBooks at page:' + this.currentPage + '成功')
           _this.books = res.data
           console.log(res.data)
         }
@@ -70,6 +78,15 @@ export default {
     handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage
       console.log(this.currentPage)
+
+      var _this = this
+      this.$axios.get('/books/page/' + this.currentPage).then(res => {
+        if (res && res.status === 200) {
+          console.log('loadBooks at page:' + this.currentPage + '成功')
+          _this.books = res.data
+          console.log(this.books)
+        }
+      })
     },
     searchResult () {
       console.log('搜索：' + this.$refs.searchBar.keywords)
