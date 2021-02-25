@@ -4,39 +4,42 @@ npm install --save axios
 npm i element-ui  
 npm install --save vuex  
 
-### API
-POST http://localhost:8989/bm/api/login  
-
-### 踩的一些坑
-springboot访问项目外的静态资源  
-MyWebConfigurer  
-http://localhost:8989/bm/api/file/download.jpg
-
-## Tomcat
-报错：
+### 部署到云服务器(linux)
+ssh到远程服务器，安装相关环境  
+MySQL
 ```
-java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[]]
-```
-解决：
-改一下pom.xml的tomcat版本即可
-```
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            // 原先是 <version>8.xx.xx</version>
-            <version>9.0.41</version>
-        </dependency>
+apt-get update
+sudo apt-get install mysql-server
+systemctl status mysql.service
+mysql -u root -p
+mysql> select version();
 ```
 
-## Vue打包
-问题：打包后static文件夹和index.html放入Springboot项目resources/static路径下，图片不显示  
-https://blog.csdn.net/rainbow8300/article/details/83010507
+JDK 1.8
+```
+sudo apt-get install openjdk-8-jdk
+java -version
+javac -version
+echo "JAVA_HOME=$(which java)" | sudo tee -a /etc/environment
+source /etc/environment
+echo $JAVA_HOME
+```
 
+Redis
+```
+apt install redis-server
+systemctl restart redis.service
+sudo systemctl status redis
+```
 
-## 部署
-ssh到远程服务器  
 MySQL建表  
 ```
 create database bm character set utf8;
 source bm.sql
 ```
+
+### TODO
+引入swagger进行更好的api管理  
+引入RBAC，进行用户注册、权限管理  
+查询sql加索引优化  
+基于where的分页查询
