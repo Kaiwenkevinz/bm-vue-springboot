@@ -52,6 +52,15 @@ jobs  // 查看后台程序
 netstat -nlp | grep :8989 // 查看端口占用情况
 ```
 
+Nginx
+```
+sudo apt-get install nginx
+systemctl status nginx
+nginx -t会返回配置信息的目录
+cd /etc/nginx/sites-enabled
+vim default
+```
+
 ### TODO
 引入swagger进行更好的api管理  
 引入RBAC，进行用户注册、权限管理  
