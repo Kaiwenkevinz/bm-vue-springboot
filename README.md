@@ -38,6 +38,16 @@ create database bm character set utf8;
 source bm.sql
 ```
 
+terminal中运行，关闭terminal结束
+```
+java -jar wishlist-0.0.1-SNAPSHOT.jar
+```
+
+后台运行
+```
+nohup java -jar xxx.jar > xxx.txt &
+```
+
 ### TODO
 引入swagger进行更好的api管理  
 引入RBAC，进行用户注册、权限管理  
