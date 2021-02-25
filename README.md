@@ -46,6 +46,8 @@ java -jar wishlist-0.0.1-SNAPSHOT.jar
 后台运行
 ```
 nohup java -jar xxx.jar > xxx.txt &
+jobs  // 查看后台程序
+netstat -nlp | grep :8989 // 查看端口占用情况
 ```
 
 ### TODO
