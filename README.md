@@ -1,3 +1,5 @@
+### Demo用户名：admin， Demo密码：123
+
 ### 本地运行
 vue init webpack bm-front  
 npm install --save axios  
