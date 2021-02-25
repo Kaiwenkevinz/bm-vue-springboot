@@ -31,3 +31,12 @@ java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException:
 ## Vue打包
 问题：打包后static文件夹和index.html放入Springboot项目resources/static路径下，图片不显示  
 https://blog.csdn.net/rainbow8300/article/details/83010507
+
+
+## 部署
+ssh到远程服务器  
+MySQL建表  
+```
+create database bm character set utf8;
+source bm.sql
+```
